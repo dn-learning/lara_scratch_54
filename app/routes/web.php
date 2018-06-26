@@ -25,11 +25,28 @@
 // });
 
 // #3
-Route::get('/', function () {
-    $tasks = [
-      'finish laracasts',
-      'make test projects',
-      'profit'
-    ];
-    return view('welcome', compact('tasks'));
+// Route::get('/', function () {
+//     $tasks = [
+//       'finish laracasts',
+//       'make test projects',
+//       'profit'
+//     ];
+//     return view('welcome', compact('tasks'));
+// });
+
+use Illuminate\Support\Facades\DB;
+
+# 4 getting data from db
+Route::get('/tasks', function () {
+    $tasks = DB::table('tasks')->get();
+
+    // return $tasks; // auto serialized into json
+
+    return view('tasks.index', compact('tasks'));
+});
+
+Route::get('/tasks/{task}', function ($id) {
+    $task = DB::table('tasks')->find($id);
+
+    return view('tasks.show', compact('task')); // one can also use 'tasks/show'
 });
