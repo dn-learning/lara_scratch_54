@@ -12,7 +12,7 @@
 
     Blade way: </br>
     @foreach ($tasks as $value)
-      <li> {{ $value->body }} </li>
+      <li> <a href='{{ url("tasks",[$value->id]) }}'> {{ $value->body }} </a> </li>
     @endforeach
   </ul>
 </body>

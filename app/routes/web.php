@@ -33,20 +33,20 @@
 //     ];
 //     return view('welcome', compact('tasks'));
 // });
-
+use App\Task;
 use Illuminate\Support\Facades\DB;
 
 # 4 getting data from db
 Route::get('/tasks', function () {
-    $tasks = DB::table('tasks')->get();
-
+    // $tasks = DB::table('tasks')->get(); // query builder
     // return $tasks; // auto serialized into json
-
+    $tasks = Task::get();
     return view('tasks.index', compact('tasks'));
 });
 
 Route::get('/tasks/{task}', function ($id) {
-    $task = DB::table('tasks')->find($id);
+    // $task = DB::table('tasks')->find($id); // query builder
+    $task = Task::find($id);
 
     return view('tasks.show', compact('task')); // one can also use 'tasks/show'
 });
