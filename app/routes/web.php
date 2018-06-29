@@ -11,6 +11,11 @@
 |
 */
 
+// these 'users' are needed only when not using controller
+// use App\Task;
+// use App\Http\Controllers\TasksController;
+// use Illuminate\Support\Facades\DB;
+
 // different ways to pass variables:
 // #1
 // Route::get('/', function () {
@@ -33,20 +38,23 @@
 //     ];
 //     return view('welcome', compact('tasks'));
 // });
-use App\Task;
-use Illuminate\Support\Facades\DB;
 
-# 4 getting data from db
-Route::get('/tasks', function () {
-    // $tasks = DB::table('tasks')->get(); // query builder
-    // return $tasks; // auto serialized into json
-    $tasks = Task::get();
-    return view('tasks.index', compact('tasks'));
-});
 
-Route::get('/tasks/{task}', function ($id) {
-    // $task = DB::table('tasks')->find($id); // query builder
-    $task = Task::find($id);
+// # 4 getting data from db
+// Route::get('/tasks', function () {
+//     // $tasks = DB::table('tasks')->get(); // query builder
+//     // return $tasks; // auto serialized into json
+//     $tasks = Task::get();
+//     return view('tasks.index', compact('tasks'));
+// });
+//
+// Route::get('/tasks/{task}', function ($id) {
+//     // $task = DB::table('tasks')->find($id); // query builder
+//     $task = Task::find($id);
+//
+//     return view('tasks.show', compact('task')); // one can also use 'tasks/show'
+// });
 
-    return view('tasks.show', compact('task')); // one can also use 'tasks/show'
-});
+// #5 finally we'll use controllers
+Route::get('/tasks', 'TasksController@index');
+Route::get('/tasks/{task}', 'TasksController@show');
