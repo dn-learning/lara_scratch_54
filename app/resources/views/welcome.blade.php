@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Lara from scratch 5.4</title>
+  <title>Lara from scratch 5.4 welcome page</title>
 </head>
 <body>
   <ul>
