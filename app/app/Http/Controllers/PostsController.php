@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use SWFMovie;
+
 use App\Post;
 use Illuminate\Http\Request;
 
@@ -9,12 +11,23 @@ class PostsController extends Controller
 {
     public function index()
     {
-        return view('posts/index');
+        // $posts = Post::all(); // the simplest case
+        // $posts = Post::orderBy('created_at', 'desc')->get();
+        $posts = Post::latest()->get(); //
+        return view('posts/index', compact('posts'));
     }
 
-    public function show()
+    // one way to do it!!!
+
+    // public function show($id)
+    // {
+    //     $post = Post::find($id);
+    //     return view('posts/show', compact('post'));
+    // }
+
+    public function show(Post $post)
     {
-        return view('posts/show');
+        return view('posts/show', compact('post'));
     }
 
     public function create()
@@ -24,6 +37,13 @@ class PostsController extends Controller
 
     public function store()
     {
+
+        // adding validation:
+        $this->validate(request(), [
+            'title' => 'required',
+            'body'=>'required'
+        ]);
+
         // dd(request()->all());
         // other ways to get data from request:
         // dd(request(['title','body'])); // array if multi fields otherwise string
@@ -43,7 +63,6 @@ class PostsController extends Controller
         // ]);
 
         // or
-
         Post::create(request(['title','body'])); // prefered by laracasts
 
 
