@@ -6,7 +6,7 @@
 
         <form method="POST" action="/posts">
 
-            @include('layouts.errors')
+            @include ('layouts.errors')
 
             {{ csrf_field() }}
             <div class="form-group">
@@ -23,7 +23,8 @@
             <div class="form-group">
                 <button type="submit" class="btn btn-primary">Publish</button>
             </div>
-            
+
+
         </form>
 
     </div>

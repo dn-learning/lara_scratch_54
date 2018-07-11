@@ -2,8 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use SWFMovie;
-
 use App\Post;
 use Illuminate\Http\Request;
 
@@ -37,7 +35,6 @@ class PostsController extends Controller
 
     public function store()
     {
-
         // adding validation:
         $this->validate(request(), [
             'title' => 'required',
@@ -64,7 +61,6 @@ class PostsController extends Controller
 
         // or
         Post::create(request(['title','body'])); // prefered by laracasts
-
 
         return redirect('/');
     }

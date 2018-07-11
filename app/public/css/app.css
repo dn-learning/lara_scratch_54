@@ -10411,10 +10411,6 @@ a.text-dark:focus {
   }
 }
 
-body {
-  background-color: grey;
-}
-
 /* stylelint-disable selector-list-comma-newline-after */
 
 .blog-header {

@@ -11,4 +11,21 @@ class Post extends Model
 
     // one can also block fields like below, leaving it empty would allow all:
     protected $guarded = ['user_id'];
+
+    public function addComment($body)
+    {
+        // one way to do it:
+        // Comment::create([
+        //     'body'      => $body,
+        //     'post_id'   => $this->id
+        // ]);
+
+        //refactor taking into account lara's way:
+        $this->comments()->create(compact('body'));
+    }
+
+    public function comments()
+    {
+        return $this->hasMany(Comment::class);
+    }
 }

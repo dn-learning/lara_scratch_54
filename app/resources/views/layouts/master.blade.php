@@ -16,7 +16,8 @@
     <link href="https://fonts.googleapis.com/css?family=Playfair+Display:700,900" rel="stylesheet">
 
     <!-- temporary in public - later served with laravel mix -->
-    <link href="css/app.css" rel="stylesheet">
+    <!-- its important to load mix file like below!!  -->
+    <link href="{{mix('/css/app.css')}}" rel="stylesheet">
   </head>
 
   <body>
