@@ -48,6 +48,7 @@
 //     return view('tasks.index', compact('tasks'));
 // });
 //
+
 // Route::get('/tasks/{task}', function ($id) {
 //     // $task = DB::table('tasks')->find($id); // query builder
 //     $task = Task::find($id);
@@ -65,3 +66,7 @@ Route::get('/posts/create', 'PostsController@create');
 Route::get('/posts/{post}', 'PostsController@show');
 Route::post('/posts', 'PostsController@store');
 Route::post('/posts/{post}/comments', 'CommentsController@store');
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
