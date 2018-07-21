@@ -27,6 +27,13 @@
     </div>
 
     <div class="container">
+        <h1 class="pb-3 mb-4 font-italic border-bottom">
+            From the Firehose
+        </h1>
+    </div>
+
+
+    <div class="container">
         <div class="row">
             @yield('content')
 

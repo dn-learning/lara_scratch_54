@@ -27,6 +27,18 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
+    public function publish(Post $post)
+    {
+        // Post::create([
+        //     'title'=>request('title'),
+        //     'body'=>request('body'),
+        //     'user'=>auth()->id()
+        // ]);
+
+        // or thanks to established below relationship:
+        $this->posts()->save($post);
+    }
+
     public function posts()
     {
         return $this->hasMany(Post::class);

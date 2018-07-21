@@ -10,7 +10,7 @@ class Post extends Model
     protected $fillable = ['title','body'];
 
     // one can also block fields like below, leaving it empty would allow all:
-    protected $guarded = ['user_id'];
+    // protected $guarded = ['user_id'];
 
     public function addComment($body)
     {

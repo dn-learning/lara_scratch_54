@@ -7,6 +7,11 @@ use Illuminate\Http\Request;
 
 class PostsController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth')->except(['index','show']);
+    }
+
     public function index()
     {
         // $posts = Post::all(); // the simplest case
@@ -60,7 +65,17 @@ class PostsController extends Controller
         // ]);
 
         // or
-        Post::create(request(['title','body'])); // prefered by laracasts
+        //Post::create(request(['title','body'])); // prefered by laracasts
+
+        // new post with user added as in ep.19
+        // Post::create([
+        //     'title'=>request('title'),
+        //     'body'=>request('body'),
+        //     'user'=>auth()->id()
+        // ]);
+
+        // and yet another way to do it:
+        auth()->user()->publish(new Post(request(['title','body'])));
 
         return redirect('/');
     }
