@@ -45,4 +45,13 @@ class Post extends Model
                     ->where('created_at', '<', $periodEnd."-01");
         }
     }
+
+    public static function archives()
+    {
+        return static::latest()
+            ->get(['id','created_at'])
+            ->groupBy(function ($date) {
+                return Carbon::Parse($date->created_at)->format('F Y');
+            });
+    }
 }

@@ -35,11 +35,17 @@ class PostsController extends Controller
             ->filter(request('period'))                             // getting selected posts via scope
             ->get();
 
-        $archives = Post::latest()->get(['id','created_at'])->groupBy(function ($date) {
-            return Carbon::Parse($date->created_at)->format('F Y');
-        });
+        // temporary way - to replace with view composer!!
+        // $archives = Post::latest()
+        //     ->get(['id','created_at'])
+        //     ->groupBy(function ($date) {
+        //         return Carbon::Parse($date->created_at)->format('F Y');
+        //     });
 
-        return view('posts/index', compact(['posts','archives']));
+        // better way:
+        $archives = Post::archives();
+
+        return view('posts/index', compact(['posts']));             // ,'archives' removed owing to refactor
     }
 
     // one way to do it!!!

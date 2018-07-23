@@ -75,7 +75,7 @@ Route::post('/posts/{post}/comments', 'CommentsController@store');
 Route::get('/register', 'RegistrationController@create');
 Route::post('/register', 'RegistrationController@store');
 
-Route::get('/login', 'SessionController@create');
+Route::get('/login', 'SessionController@create')->name('login');
 Route::post('/login', 'SessionController@store');
 
 Route::get('/logout', 'SessionController@destroy');
