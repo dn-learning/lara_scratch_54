@@ -16,7 +16,7 @@ class TasksController extends Controller
     // public function show($id)
     // {
     //     $task = Task::find($id);
-    //     return view('tasks.show', compact('task')); // one can also use 'tasks/show'
+    //     return view('tasks.show', compact('task'));                      // one can also use 'tasks/show'
     // }
 
     // below we make use of ROUTE MODEL BINDING

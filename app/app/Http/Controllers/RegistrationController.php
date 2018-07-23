@@ -33,6 +33,6 @@ class RegistrationController extends Controller
 
         // redirect
         //return redirect('/');
-        return redirect()->home(); // redirect to named page
+        return redirect()->home();                                  // redirect to named page
     }
 }

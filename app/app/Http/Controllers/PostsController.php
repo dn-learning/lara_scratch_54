@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Post;
+use Carbon\Carbon;
+
 use Illuminate\Http\Request;
 
 class PostsController extends Controller
@@ -14,10 +16,30 @@ class PostsController extends Controller
 
     public function index()
     {
-        // $posts = Post::all(); // the simplest case
+        // $posts = Post::all();                                    // the simplest case
         // $posts = Post::orderBy('created_at', 'desc')->get();
-        $posts = Post::latest()->get(); //
-        return view('posts/index', compact('posts'));
+        // $posts = Post::latest()->get();                          // used prior to refactor below
+
+
+        // getting selected posts before refactor!
+        // if (request('period')) {
+        //     $periodStart = Carbon::Parse(request('period'))->format('Y-m');
+        //     $periodEnd = Carbon::Parse(request('period'))->addMonth()->format('Y-m');
+        //
+        //     $posts = $posts->where('created_at', '>=', $periodStart."-01")
+        //                     ->where('created_at', '<', $periodEnd."-01");
+        // }
+
+        // refactored way via query scope
+        $posts = Post::latest()
+            ->filter(request('period'))                             // getting selected posts via scope
+            ->get();
+
+        $archives = Post::latest()->get(['id','created_at'])->groupBy(function ($date) {
+            return Carbon::Parse($date->created_at)->format('F Y');
+        });
+
+        return view('posts/index', compact(['posts','archives']));
     }
 
     // one way to do it!!!
@@ -37,6 +59,19 @@ class PostsController extends Controller
     {
         return view('posts/create');
     }
+
+    // public function test()
+    // {
+    // tested in tinker grouping by year - month
+    // $test2 = Post::latest()->get(['id','created_at'])->groupBy(function ($date) {
+    //     return \Carbon\Carbon::Parse($date->created_at)->format('F Y');
+    // });
+
+    // counting post in each month
+    // foreach ($test2 as $period) {
+    //     echo count($period)."\n";
+    // }
+    // }
 
     public function store()
     {

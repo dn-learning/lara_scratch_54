@@ -2,6 +2,7 @@
 
 namespace App;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 
 class Post extends Model
@@ -32,5 +33,16 @@ class Post extends Model
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function scopeFilter($query, $filters)
+    {
+        if ($filters) {
+            $periodStart = Carbon::Parse($filters)->format('Y-m');
+            $periodEnd = Carbon::Parse($filters)->addMonth()->format('Y-m');
+
+            $query = $query->where('created_at', '>=', $periodStart."-01")
+                    ->where('created_at', '<', $periodEnd."-01");
+        }
     }
 }
